@@ -15,6 +15,9 @@ Está imagem foi desenvolvida afim de facilitar a vida do desenvolvedor PHP, per
 - Caso o comando `sh` não sirva para você executar os scripts, então experimente utilizar `./script-...`.
 
 
+## 0º Passo
+Clone este repositório para sua área de trabalho, pois iremos trabalhar a partir dessa estrutura de projeto.
+
 
 ## 1º Passo
 Verificar se o Docker está sendo executado em sua máquina. 

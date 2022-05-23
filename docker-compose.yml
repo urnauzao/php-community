@@ -1,0 +1,75 @@
+version: "3.9"
+services:
+  #aplicação web (PHP+NGINX)
+  web:
+    # image: urnau/php-community:8.0.17-fpm-nginx
+    image: urnau/php-community:latest
+    # utilizado quando vamos contruir uma nova imagem
+    build: 
+      context: .
+      dockerfile: ./Dockerfile
+    networks:
+      - net_principal
+    volumes:
+      - ./applications:/var/www
+      - ./docker/nginx/sites:/etc/nginx/sites-available
+    ports:
+      - "80:80" #http
+      - "443:443" #https
+      - "8080:8080"
+      - "8081:8081"
+      - "8082:8082"
+      - "8083:8083"
+      - "8084:8084"
+      - "8085:8085"
+      - "8086:8086"
+      - "8087:8087"
+      - "8088:8088"
+      - "8089:8089"
+    depends_on:
+      - postgres
+      - redis
+      - mysql
+  # aplicação Postgres
+  postgres:
+    image: postgres:14.3-alpine
+    restart: always
+    networks:
+      - net_principal
+    volumes:
+      - POSTGRES_VOLUME_EXEMPLO=/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWOD: senha_exemplar_postgres
+      POSTGRES_DB: db_postgres_exemplo
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - 20000:5432
+  # aplicação MySQL
+  mysql:
+    image: mysql:8.0.29-debian
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes:
+      - MYSQL_VOLUME_EXEMPLO=/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: senha_exemplar_mysql
+      MYSQL_DATABASE: db_mysql_exemplo
+    networks:
+      - net_principal
+    ports:
+      - 30000:3306
+  # aplicação Redis
+  redis:
+    image: redis:7-alpine
+    restart: always
+    networks:
+      - net_principal
+    ports:
+      - 6379:6379
+
+networks:
+  net_principal:
+
+volumes:
+  POSTGRES_VOLUME_EXEMPLO:
+  MYSQL_VOLUME_EXEMPLO:

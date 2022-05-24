@@ -4,6 +4,8 @@ Está imagem foi desenvolvida afim de facilitar a vida do desenvolvedor PHP, per
 # Imagem Docker PHP com Nginx
 [Ver imagem no Docker Hub](https://hub.docker.com/r/urnau/php-community)
 
+# Ver Vídeo Passo a Passo
+[Clique aqui para acessar o vídeo tutorial no YouTube](https://youtu.be/tm4WpxBai0w)
 ## Requisitos
 - Ter o Docker instalando em sua máquina. Este passo a passo funciona tanto para ambiente Linux como para Windows e macOS.
 - Caso você deseje subir uma imagem customizada para seu próprio Docker Hub é necessário então ter uma conta no [Docker Hub](https://hub.docker.com).

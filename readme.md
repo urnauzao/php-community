@@ -73,6 +73,9 @@ Para isso iremos usar a pasta `applications`, nela devemos salvar colocar cada p
 Assim, você pode clonar um projeto já existente dentro de `applications`, ou pode usar o script abaixo para gerar uma aplicação Laravel do zero. Certifique-se de ter o Composer e o PHP instalado em sua máquina para executar.
 > sh script-new-project-laravel.sh
 
+<b>OBS:</b> Para ajustar variaveis de conexão de banco de dados na sua aplicação veja exemplo: [index.php](./applications/php1/public/index.php).
+
+
 ## 9º Passo
 Agora é hora de configurar o Nginx para que ele consiga encontrar suas aplicações.
 Para isso execute:
@@ -82,11 +85,18 @@ Ao executar esse script, você deverá informar qual o nome da pasta de sua apli
 
 ## 10º Passo
 Com todas essas configurações feitas, agora é hora de colocar a aplicação em execução.
-> script-start-docker-compose
+> sh script-start-docker-compose.sh
+
+
+Exemplo para acessar sua aplicação:
+http://localhost:8080
 
 ## 11º Passo
 Para derrubar a aplicação execute:
 > sh script-drop-docker-compose.sh
+
+## 12º Passo
+Caso use Windows o macOS, agora é só mover todo o ambiente configurado aqui para dentro do WSL.
 
 ## Outras informações
 - Caso precise remover as configuções de sites do Nginx, acesse a pasta docker/nginx/sites e lá encontre e remova as configurações `.conf` que desejar.

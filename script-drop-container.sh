@@ -5,4 +5,4 @@ echo ""
 echo ""
 echo "Digite o id do Container que deseja derrubar:"
 read container_id
-docker rm $container_id
+docker rm $container_id -f

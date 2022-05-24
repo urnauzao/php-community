@@ -2,8 +2,8 @@ version: "3.9"
 services:
   #aplicação web (PHP+NGINX)
   web:
-    # image: urnau/php-community:8.0.17-fpm-nginx
-    image: urnau/php-community:latest
+    image: urnau/php-community:8.0.17-fpm-nginx
+    # image: urnau/php-community:latest
     # utilizado quando vamos contruir uma nova imagem
     build: 
       context: .
@@ -39,7 +39,7 @@ services:
     volumes:
       - POSTGRES_VOLUME_EXEMPLO=/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWOD: senha_exemplar_postgres
+      POSTGRES_PASSWORD: senha_exemplar_postgres
       POSTGRES_DB: db_postgres_exemplo
       POSTGRES_HOST_AUTH_METHOD: trust
     ports:

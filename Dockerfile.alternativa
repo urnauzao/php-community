@@ -1,8 +1,12 @@
 # Argumentos da Imagem
 ## Versão da Imagem Docker PHP
-ARG PHP_VERSION=8.0.19-fpm
-FROM php:${PHP_VERSION}
+ARG PHP_VERSION=8.0.17-fpm
 
+FROM php:${PHP_VERSION}
+## Usuário e Id para a imagem
+### para visualizar o uid de seu usuário no linux execute: echo $UID no terminal
+ARG USER=?
+ARG UID=?
 ## Diretório da aplicação
 ARG APP_DIR=/var/www
 ## Versão da Lib do Redis para PHP
@@ -31,12 +35,12 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-install mysqli pdo pdo_mysql pdo_pgsql pgsql session xml 
 
 # habilita instalação do Redis
+## https://pecl.php.net/package/redis
 RUN pecl install redis-${REDIS_LIB_VERSION} \
     && docker-php-ext-enable redis 
 
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
 
 RUN docker-php-ext-install zip iconv simplexml pcntl gd fileinfo
 
@@ -49,6 +53,12 @@ RUN cd $APP_DIR
 RUN chmod 755 -R *
 RUN chown -R www-data: *
 
+# Adicionando para execução de comandos Composer e Artisan, e também compatibilidade de leitura e escrita
+## add usuário ao grupo de www-data e root, com o $UID informado, no diretório X, e com nome de usuário $USER
+RUN useradd -G www-data,root -u $UID -d /home/$USER $USER
+RUN chown -R $USER:$USER $APP_DIR && chmod 755 -R $APP_DIR/* && chown -R $USER:$USER /etc/supervisord.d/ && chown -R $USER:$USER /etc/supervisor
+
+# Instalado o NGINX
 RUN apt install nginx -y
 
 # carragar configuração padrão do NGINX
@@ -59,3 +69,5 @@ COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
+
+USER $USER

@@ -2,7 +2,7 @@ version: "3.9"
 services:
   #aplicação web (PHP+NGINX)
   web:
-    image: urnau/php-community:8.0.17-fpm-nginx
+    image: urnau/php-community:8.0.19-fpm-nginx
     # image: urnau/php-community:latest
     # utilizado quando vamos contruir uma nova imagem
     build: 

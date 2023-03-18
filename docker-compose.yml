@@ -51,6 +51,7 @@ services:
     restart: always
     volumes:
       - MYSQL_VOLUME_EXEMPLO=/var/lib/mysql
+      #- 'MYSQL_VOLUME_EXEMPLO=/var/lib/mysql'
     environment:
       MYSQL_ROOT_PASSWORD: senha_exemplar_mysql
       MYSQL_DATABASE: db_mysql_exemplo
@@ -73,3 +74,4 @@ networks:
 volumes:
   POSTGRES_VOLUME_EXEMPLO:
   MYSQL_VOLUME_EXEMPLO:
+    driver: local
